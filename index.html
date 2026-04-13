@@ -703,21 +703,73 @@
             <div class="subsection">
                 <h3 class="subsection-title">2.2 資料流向</h3>
                 <div class="config-box">
-                    <pre style="margin: 0; font-family: monospace; font-size: 0.9rem; line-height: 1.8;">
-┌─────────────┐         ┌─────────────┐         ┌─────────────┐
-│   設備/PLC   │ ──────▶ │  IIoT 平台   │ ◀─────▶ │  eMES 系統  │
-└─────────────┘         └─────────────┘         └─────────────┘
-
-                        【IIoT → eMES】
-                        ● 設備狀態推送 (machineStatusProcess)
-                          IIoT 主動將設備狀態推送給 eMES
-
-                        【eMES → IIoT】
-                        ● 產量資料查詢 (production.edc.get)
-                          eMES 向 IIoT 查詢設備產量
-                        ● 計數器清零 (workshops_task_command)
-                          eMES 下發清零指令給 IIoT
-                    </pre>
+                    <svg viewBox="0 0 800 320" style="width:100%;max-width:800px;height:auto;display:block;margin:1.5rem auto;font-family:Microsoft JhengHei,sans-serif;">
+  <!-- 背景 -->
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1d4ed8;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#10b981;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#059669;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="grad3" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#8b5cf6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#7c3aed;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="2" dy="3" stdDeviation="3" flood-opacity="0.2"/>
+    </filter>
+  </defs>
+  
+  <!-- 設備/PLC 方塊 -->
+  <rect x="30" y="40" width="140" height="70" rx="10" fill="url(#grad1)" filter="url(#shadow)"/>
+  <text x="100" y="70" text-anchor="middle" fill="white" font-size="14" font-weight="bold">設備 / PLC</text>
+  <text x="100" y="90" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="11">現場設備</text>
+  
+  <!-- IIoT 平台方塊 -->
+  <rect x="330" y="40" width="140" height="70" rx="10" fill="url(#grad2)" filter="url(#shadow)"/>
+  <text x="400" y="70" text-anchor="middle" fill="white" font-size="14" font-weight="bold">IIoT 平台</text>
+  <text x="400" y="90" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="11">工業物聯網</text>
+  
+  <!-- eMES 系統方塊 -->
+  <rect x="630" y="40" width="140" height="70" rx="10" fill="url(#grad3)" filter="url(#shadow)"/>
+  <text x="700" y="70" text-anchor="middle" fill="white" font-size="14" font-weight="bold">eMES 系統</text>
+  <text x="700" y="90" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="11">製造執行系統</text>
+  
+  <!-- 設備到IIoT箭頭 -->
+  <path d="M175 75 L320 75" stroke="#64748b" stroke-width="2" fill="none" marker-end="url(#arrowGray)"/>
+  <defs><marker id="arrowGray" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#64748b"/></marker></defs>
+  
+  <!-- IIoT 到 eMES 雙向箭頭 -->
+  <line x1="475" y1="75" x2="620" y2="75" stroke="#64748b" stroke-width="2" stroke-dasharray="5,3"/>
+  <polygon points="620,70 630,75 620,80" fill="#64748b"/>
+  <polygon points="480,70 470,75 480,80" fill="#64748b"/>
+  
+  <!-- 資料流說明區域 -->
+  <!-- IIoT → eMES -->
+  <rect x="50" y="140" width="330" height="80" rx="8" fill="#f0fdf4" stroke="#86efac" stroke-width="2"/>
+  <circle cx="80" cy="160" r="12" fill="#22c55e"/>
+  <text x="80" y="165" text-anchor="middle" fill="white" font-size="12" font-weight="bold">1</text>
+  <text x="100" y="165" fill="#166534" font-size="13" font-weight="bold">IIoT → eMES</text>
+  <text x="70" y="190" fill="#15803d" font-size="12">● 設備狀態推送 (machineStatusProcess)</text>
+  <text x="80" y="208" fill="#64748b" font-size="11">IIoT 主動將設備狀態推送給 eMES</text>
+  
+  <!-- eMES → IIoT -->
+  <rect x="420" y="140" width="350" height="80" rx="8" fill="#faf5ff" stroke="#c4b5fd" stroke-width="2"/>
+  <circle cx="450" cy="160" r="12" fill="#8b5cf6"/>
+  <text x="450" y="165" text-anchor="middle" fill="white" font-size="12" font-weight="bold">2</text>
+  <text x="470" y="165" fill="#5b21b6" font-size="13" font-weight="bold">eMES → IIoT</text>
+  <text x="440" y="190" fill="#6d28d9" font-size="12">● 產量資料查詢 (production.edc.get)</text>
+  <text x="440" y="208" fill="#6d28d9" font-size="12">● 計數器清零 (workshops_task_command)</text>
+  
+  <!-- 底部說明 -->
+  <rect x="50" y="250" width="720" height="50" rx="8" fill="#fefce8" stroke="#fde047" stroke-width="2"/>
+  <text x="70" y="275" fill="#854d0e" font-size="12">⚠️ 設備編號格式：</text>
+  <text x="180" y="275" fill="#a16207" font-size="13" font-weight="bold" font-family="Consolas,monospace">公司別##設備編號</text>
+  <text x="340" y="275" fill="#854d0e" font-size="12">（例如：NGOCSONBR##E-01-004）</text>
+</svg>
                 </div>
             </div>
 
