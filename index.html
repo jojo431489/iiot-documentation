@@ -602,6 +602,7 @@
             <a href="#architecture">架構說明</a>
             <a href="#config-guide">設定指南(圖)</a>
             <a href="#api">API 介面</a>
+            <a href="#features">應用功能</a>
             <a href="#test">測試方法</a>
             <a href="#video">教學影片</a>
             <a href="#appendix">附錄</a>
@@ -1328,6 +1329,129 @@
         </section>
 
         <!-- 五、測試方法 -->
+        
+        <!-- 應用功能說明 -->
+        <section id="features" class="section">
+            <span class="anchor"></span>
+            <h2 class="section-title"><span class="icon">🚀</span> 應用功能說明</h2>
+
+            <p style="margin-bottom:1.5rem;">以下說明 eMES 系統中整合 IIoT 設備生產數量功能的應用場景。</p>
+
+            <!-- KMI 功能 -->
+            <div class="subsection">
+                <h3 class="subsection-title">KMI 出站作業 - IIoT 整合功能</h3>
+                <div class="info-box info">
+                    <span class="icon">📋</span>
+                    <div><strong>ISSUE #0189810</strong>：KMI 加入 IIoT 取設備生產數量功能</div>
+                </div>
+
+                <h4>功能說明</h4>
+                <div class="api-card">
+                    <p><strong>出站頁面新增「IIoT」按鈕</strong>，點擊後開窗顯示：</p>
+                    <ul style="margin:1rem 0 1rem 1.5rem;">
+                        <li><strong>設備計數</strong> - 顯示目前設備的生產計數（呼叫 <code>production.edc.get</code>）</li>
+                        <li><strong>填入報工數量</strong> - 將設備計數回填至出站數量欄位</li>
+                        <li><strong>清零</strong> - 清除設備計數器（呼叫 <code>workshops_task_command</code>）</li>
+                    </ul>
+                </div>
+
+                <h4>權限控制</h4>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr><th>IIoT 模組狀態</th><th>按鈕顯示</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>✅ 開啟</td><td>顯示「IIoT」按鈕</td></tr>
+                            <tr><td>❌ 關閉</td><td>隱藏按鈕</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 手機 APP 功能 -->
+            <div class="subsection">
+                <h3 class="subsection-title">手機 APP 出站作業 - IIoT 整合功能</h3>
+                <div class="info-box info">
+                    <span class="icon">📱</span>
+                    <div><strong>ISSUE #0189822</strong>：手機 APP 出站加入 IIoT 取設備生產數量功能</div>
+                </div>
+
+                <h4>功能說明</h4>
+                <div class="api-card">
+                    <p><strong>手機 APP 出站頁面新增「IIoT」按鈕</strong>，點擊後開窗顯示：</p>
+                    <ul style="margin:1rem 0 1rem 1.5rem;">
+                        <li><strong>設備計數</strong> - 顯示目前設備的生產計數</li>
+                        <li><strong>填入報工數量</strong> - 將設備計數回填至出站數量欄位</li>
+                        <li><strong>清零</strong> - 清除設備計數器</li>
+                    </ul>
+                </div>
+
+                <h4>權限控制</h4>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr><th>IIoT 模組狀態</th><th>按鈕顯示</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>✅ 開啟</td><td>顯示「IIoT」按鈕</td></tr>
+                            <tr><td>❌ 關閉</td><td>隱藏按鈕</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 操作流程 -->
+            <div class="subsection">
+                <h3 class="subsection-title">操作流程</h3>
+                
+                <svg viewBox="0 0 800 200" style="width:100%;max-width:800px;height:auto;display:block;margin:1rem auto;">
+                    <defs>
+                        <linearGradient id="stepGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" style="stop-color:#3b82f6"/>
+                            <stop offset="100%" style="stop-color:#1d4ed8"/>
+                        </linearGradient>
+                    </defs>
+                    
+                    <!-- Step 1 -->
+                    <rect x="20" y="60" width="150" height="80" rx="10" fill="url(#stepGrad)" />
+                    <text x="95" y="95" text-anchor="middle" fill="white" font-size="13" font-weight="bold">1. 點擊 IIoT 按鈕</text>
+                    <text x="95" y="115" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="11">出站頁面</text>
+                    
+                    <!-- Arrow 1 -->
+                    <path d="M175 100 L205 100" stroke="#64748b" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+                    
+                    <!-- Step 2 -->
+                    <rect x="210" y="60" width="150" height="80" rx="10" fill="url(#stepGrad)" />
+                    <text x="285" y="95" text-anchor="middle" fill="white" font-size="13" font-weight="bold">2. 查看設備計數</text>
+                    <text x="285" y="115" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="11">呼叫 API 取得</text>
+                    
+                    <!-- Arrow 2 -->
+                    <path d="M365 100 L395 100" stroke="#64748b" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+                    
+                    <!-- Step 3 -->
+                    <rect x="400" y="60" width="150" height="80" rx="10" fill="#22c55e" />
+                    <text x="475" y="95" text-anchor="middle" fill="white" font-size="13" font-weight="bold">3. 填入報工數量</text>
+                    <text x="475" y="115" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="11">回填出站數量</text>
+                    
+                    <!-- Arrow 3 -->
+                    <path d="M555 100 L585 100" stroke="#64748b" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+                    
+                    <!-- Step 4 -->
+                    <rect x="590" y="60" width="150" height="80" rx="10" fill="#f59e0b" />
+                    <text x="665" y="95" text-anchor="middle" fill="white" font-size="13" font-weight="bold">4. 清零（選填）</text>
+                    <text x="665" y="115" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="11">重置設備計數</text>
+                    
+                    <defs>
+                        <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                            <path d="M0,0 L0,6 L9,3 z" fill="#64748b"/>
+                        </marker>
+                    </defs>
+                </svg>
+            </div>
+        </section>
+
+
         <section id="test" class="section">
             <span class="anchor"></span>
             <h2 class="section-title"><span class="icon">🧪</span> 五、測試方法</h2>
