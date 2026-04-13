@@ -705,17 +705,18 @@
                 <div class="config-box">
                     <pre style="margin: 0; font-family: monospace; font-size: 0.9rem; line-height: 1.8;">
 ┌─────────────┐         ┌─────────────┐         ┌─────────────┐
-│   設備/PLC   │ ──────▶ │  IIoT 平台   │ ──────▶ │  eMES 系統  │
+│   設備/PLC   │ ──────▶ │  IIoT 平台   │ ◀─────▶ │  eMES 系統  │
 └─────────────┘         └─────────────┘         └─────────────┘
-                              │                        │
-                              │    設備狀態推送        │
-                              │ ◀──────────────────── │
-                              │                        │
-                              │    產量資料查詢        │
-                              │ ──────────────────▶   │
-                              │                        │
-                              │    計數器清零指令      │
-                              │ ◀──────────────────── │
+
+                        【IIoT → eMES】
+                        ● 設備狀態推送 (machineStatusProcess)
+                          IIoT 主動將設備狀態推送給 eMES
+
+                        【eMES → IIoT】
+                        ● 產量資料查詢 (production.edc.get)
+                          eMES 向 IIoT 查詢設備產量
+                        ● 計數器清零 (workshops_task_command)
+                          eMES 下發清零指令給 IIoT
                     </pre>
                 </div>
             </div>
